@@ -10,14 +10,18 @@ const getProprietarioById = async (id) => {
     return result.rows[0];
 };
 
-const createProprietario = async (proprietario_name, founder) => {
-    const result = await pool.query("INSERT INTO proprietarios (proprietario_name, founder) VALUES ($1, $2) RETURNING *", [proprietario_name, founder]
+const createProprietario = async (proprietario_name) => {
+    const result = await pool.query(
+        "INSERT INTO proprietarios (proprietario_name) VALUES ($1, $2) RETURNING *",
+        [proprietario_name]
     );
     return result.rows[0];
 };
 
-const updateProprietario = async (id, proprietario_name, founder) => {
-    const result = await pool.query("UPDATE proprietarios SET publisher_name = $1, founder = $2 WHERE id = $3 RETURNING *", [proprietario_name, founder, id]
+const updateProprietario = async (id, proprietario_name) => {
+    const result = await pool.query(
+        "UPDATE proprietarios SET publisher_name = $1 = $2 WHERE id = $3 RETURNING *", 
+        [proprietario_name, id]
     );
     return result.rows[0];
 };

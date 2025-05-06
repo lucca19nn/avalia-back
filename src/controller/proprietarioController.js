@@ -2,7 +2,7 @@ const proprietarioModel = require("../models/proprietarioModels");
 
 const getAllProprietarios = async (req, res) => {
     try {
-        const proprietarios = await proprietarioModel.getProprietarios();
+        const proprietarios = await proprietarioModel.getAllProprietarios();
         res.json(proprietarios);
     } catch (error) {
         res.status(500).json({ message: "Erro ao buscar Proprietarios" });
@@ -11,9 +11,9 @@ const getAllProprietarios = async (req, res) => {
 
 const getProprietarioById = async (req, res) => {
     try {
-        const proprietario = await proprietarioModel.getproprietarioById(req.params.id);
+        const proprietario = await proprietarioModel.getProprietarioById(req.params.id);
         if (!proprietario) {
-            return res.status(404).json({ message: "Editora não encontrada." });
+            return res.status(404).json({ message: "Proprietario não encontrado." });
         }
         res.json(proprietario);
     } catch (error) {

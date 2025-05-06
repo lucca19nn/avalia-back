@@ -4,6 +4,7 @@ const proprietarioController = require('../controller/proprietarioController');
 const apiKeyMiddleware = require('../config/apiKey');
 
 router.use(apiKeyMiddleware);
+
 router.get('/proprietarios', proprietarioController.getAllProprietarios);
 router.get('/proprietarios/:id', proprietarioController.getProprietarioById);
 router.post('/proprietarios', proprietarioController.createProprietario);
