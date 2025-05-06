@@ -6,6 +6,7 @@ const apiKeyMiddleware = require('../config/apiKey');
 
 router.use(apiKeyMiddleware);
 router.get('/imoveis', imoveisController.getAllImoveis);
+router.get('/imoveis/:id', imoveisController.getImovelById);
 router.post('/imoveis', upload.single("photo"), imoveisController.createImovel);
 router.put('/imoveis/:id', imoveisController.updateImovel);
 router.delete('/imoveis/:id', imoveisController.deleteImovel);

@@ -15,7 +15,7 @@ app.use("/api", reportRoutes);
 app.use("/api", imoveisRoutes);
 app.use("/api", proprietariosRoutes);
 
-const PORT = process.env.PORT || 3003;
+const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
     console.log(`🚀 Servidor rodando em http://localhost:${PORT}`);
 });

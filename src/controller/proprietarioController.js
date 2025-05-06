@@ -5,55 +5,80 @@ const getAllProprietarios = async (req, res) => {
         const proprietarios = await proprietarioModel.getAllProprietarios();
         res.json(proprietarios);
     } catch (error) {
-        res.status(500).json({ message: "Erro ao buscar Proprietarios" });
+        console.error("Erro ao buscar todos os proprietários:", error);
+        res.status(500).json({ message: "Erro ao buscar proprietários." });
     }
 };
 
 const getProprietarioById = async (req, res) => {
     try {
-        const proprietario = await proprietarioModel.getProprietarioById(req.params.id);
+        const { id } = req.params;
+        const proprietario = await proprietarioModel.getProprietarioById(id);
+
         if (!proprietario) {
-            return res.status(404).json({ message: "Proprietario não encontrado." });
+            return res.status(404).json({ message: "Proprietário não encontrado." });
         }
+
         res.json(proprietario);
     } catch (error) {
-        res.status(500).json({ message: "Erro ao buscar Proprietario" });
+        console.error("Erro ao buscar proprietário por ID:", error);
+        res.status(500).json({ message: "Erro ao buscar proprietário." });
     }
 };
 
 const createProprietario = async (req, res) => {
     try {
         const { proprietario_name } = req.body;
+
+        if (!proprietario_name) {
+            return res.status(400).json({ message: "O nome do proprietário é obrigatório." });
+        }
+
         const newProprietario = await proprietarioModel.createProprietario(proprietario_name);
         res.status(201).json(newProprietario);
     } catch (error) {
-        res.status(500).json({ message: "Erro ao criar Proprietario" });
+        console.error("Erro ao criar proprietário:", error);
+        res.status(500).json({ message: "Erro ao criar proprietário." });
     }
 };
 
 const updateProprietario = async (req, res) => {
     try {
+        const { id } = req.params;
         const { proprietario_name } = req.body;
-        const proprietario = await proprietarioModel.updateProprietario(req.params.id, proprietario_name);
-        if (!proprietario) {
-            return res.status(404).json({ message: "Proprietario não encontrado." });
+
+        if (!proprietario_name) {
+            return res.status(400).json({ message: "O nome do proprietário é obrigatório." });
         }
-        res.json(proprietario);
+
+        const updatedProprietario = await proprietarioModel.updateProprietario(id, proprietario_name);
+
+        if (!updatedProprietario) {
+            return res.status(404).json({ message: "Proprietário não encontrado." });
+        }
+
+        res.json(updatedProprietario);
     } catch (error) {
-        res.status(500).json({ message: "Erro ao editar editora." });
+        console.error("Erro ao editar proprietário:", error);
+        res.status(500).json({ message: "Erro ao editar proprietário." });
     }
 };
 
 const deleteProprietario = async (req, res) => {
     try {
-        const proprietario = await proprietarioModel.deleteproprietario(req.params.id);
-        if (!proprietario) {
-            return res.status(404).json({ message: "Proprietario não encontrado." });
+        const { id } = req.params;
+        const deletedProprietario = await proprietarioModel.deleteProprietario(id);
+
+        if (!deletedProprietario) {
+            return res.status(404).json({ message: "Proprietário não encontrado." });
         }
-        res.json(proprietario);
+
+        res.json({ message: "Proprietário deletado com sucesso." });
     } catch (error) {
-        res.status(500).json({ message: "Erro ao deletar Proprietario." });
+        console.error("Erro ao deletar proprietário:", error);
+        res.status(500).json({ message: "Erro ao deletar proprietário." });
     }
 };
 
-module.exports = { getAllProprietarios, getProprietarioById, createProprietario, updateProprietario, deleteProprietario };
+module.exports = { getAllProprietarios, getProprietarioById, createProprietario, updateProprietario, deleteProprietario,
+};
