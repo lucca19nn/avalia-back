@@ -19,7 +19,7 @@ INSERT INTO proprietarios (proprietario_name) VALUES
     ('Rafael Henry');
 
 INSERT INTO imoveis (name, proprietario_name, photo) VALUES
-    ('Riviera Módulo 12 - Bertioga/SP', 'André Lucca'),
-    ('Riviera Módulo 11 - Bertioga/SP', 'Rafael Henry'),
-;
+    ('Riviera Módulo 12 - Bertioga/SP', 'André Lucca', NULL),
+    ('Riviera Módulo 11 - Bertioga/SP', 'Rafael Henry', NULL);
+
 
